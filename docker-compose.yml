@@ -1,0 +1,33 @@
+version: "3.2"
+services:
+    www:
+        build: .
+        ports: 
+            - 80:80
+            - 443:443
+        volumes:
+            - ./www:/var/www/html/
+        depends_on:
+          - sqlserver
+        hostname: lara.local
+        links:
+            - sqlserver
+        networks:
+            - default
+
+    sqlserver:
+      build: ./sqlserver
+      hostname: 'sqlserver'
+      environment:
+        ACCEPT_EULA: Y
+        MSSQL_SA_PASSWORD: Admin@12345
+      ports:
+        - 1433:1433
+      volumes:
+        - ./ms-sqlserver-data:/var/opt/mssql
+      networks:
+        - default
+volumes:
+    persistent:
+    ms-sqlserver-data:
+      driver: local
