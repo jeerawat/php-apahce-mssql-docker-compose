@@ -1,4 +1,4 @@
-# php-apahce-mssql-docker-compse
+# php-apahce-mssql-docker-compose
 
 
 ## Run Docker-Compose
